@@ -5,7 +5,7 @@ RUN apk add openjdk17
 
 COPY . .
 RUN chmod +x ./mvnw
-RUN ./gradlew bootJar --no-daemon
+RUN ./mvnw bootJar --no-daemon
 
 FROM openjdk:17-alpine
 EXPOSE 9000
