@@ -1,24 +1,14 @@
-# Etapa de construcción (build stage)
-FROM maven:3.8.6-openjdk-17-slim as build
+FROM alpine:latest as build
 
-# Establecer el directorio de trabajo en la imagen
-WORKDIR /app
+RUN apk update
+RUN apk add openjdk17
 
-# Copiar el pom.xml y el código fuente a la imagen
-COPY pom.xml .
-COPY src ./src
+COPY . .
+RUN chmod +x ./mvnw
+RUN ./gradlew bootJar --no-daemon
 
-# Ejecutar Maven para construir el archivo JAR
-RUN mvn clean package -DskipTests
-
-# Etapa de ejecución (runtime stage)
 FROM openjdk:17-alpine
-
-# Exponer el puerto donde se ejecutará la aplicación
 EXPOSE 9000
+COPY --from=build ./build/libs/*.jar ./app.jar
 
-# Copiar el JAR construido desde la etapa de construcción
-COPY --from=build /app/target/*.jar /app.jar
-
-# Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
