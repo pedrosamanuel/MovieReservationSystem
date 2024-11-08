@@ -10,46 +10,51 @@ A system that allows users to reserve movie tickets. It supports features like u
 - **Reporting**: Admins can view all reservations, capacity, and revenue.
 
 ## Endpoints
-
+### For admin role
 ### Showtime Management
 - **GET** `/api/showtime/{id}`: Get a specific showtime by ID.
-- **POST** `/api/showtime`: Create a new showtime (Admin).
-- **GET** `/api/showtime/by-date`: Get showtimes for a specific date.
-- **PUT** `/api/showtime/{id}`: Update a showtime (Admin).
-- **DELETE** `/api/showtime/{id}`: Delete a showtime (Admin).
+- **POST** `/api/showtime`: Create a new showtime.
+- **PUT** `/api/showtime/{id}`: Update a showtime.
+- **DELETE** `/api/showtime/{id}`: Delete a showtime.
 
-### Room Management
+#### Room Management
 - **GET** `/api/room/{id}`: Get room details by ID.
-- **POST** `/api/room`: Create a new room (Admin).
-- **PUT** `/api/room/{id}`: Update room details (Admin).
-- **DELETE** `/api/room/{id}`: Delete a room (Admin).
+- **POST** `/api/room`: Create a new room.
+- **PUT** `/api/room/{id}`: Update room details.
+- **DELETE** `/api/room/{id}`: Delete a room.
 
-### Reservation Management
+#### Reservation Management
 - **GET** `/api/reserve/{id}`: Get reservation details by ID.
-- **POST** `/api/reserve`: Create a reservation (User).
-- **PUT** `/api/reserve/{id}`: Update a reservation (User).
-- **PUT** `/api/reserve/cancel/{reserveId}`: Cancel a reservation (User).
-- **GET** `/api/reserve/user`: Get a list of reservations for the logged-in user.
-- **GET** `/api/reserve/showtime/{showtimeId}`: Get available seats for a specific showtime.
+- **POST** `/api/reserve`: Create a reservation .
+- **PUT** `/api/reserve/{id}`: Update a reservation.
+- **GET** `/api/reserve/showtime/{showtimeId}`: Get reserved seats for a specific showtime.
 
-### Movie Management
+#### Movie Management
 - **GET** `/api/movie/{id}`: Get movie details by ID.
-- **POST** `/api/movie`: Create a new movie (Admin).
-- **PUT** `/api/movie/{id}`: Update movie details (Admin).
-- **DELETE** `/api/movie/{id}`: Delete a movie (Admin).
+- **POST** `/api/movie`: Create a new movie.
+- **PUT** `/api/movie/{id}`: Update movie details.
+- **DELETE** `/api/movie/{id}`: Delete a movie.
 
-### Genre Management
+#### Genre Management
 - **GET** `/api/genre/{id}`: Get genre details by ID.
 - **POST** `/api/genre`: Create a new genre (Admin).
 - **PUT** `/api/genre/{id}`: Update genre details (Admin).
 - **DELETE** `/api/genre/{id}`: Delete a genre (Admin).
 
-### Seat Management
-- **POST** `/api/seat`: Add a new seat (Admin).
-- **GET** `/api/seat/showtime/{showtimeId}`: Get available seats for a specific showtime.
-- **GET** `/api/seat/room/{roomId}`: Get available seats for a specific room.
-- **DELETE** `/api/seat/{id}`: Delete a seat (Admin).
+#### Seat Management
+- **POST** `/api/seat`: Add a new seat.
+- **GET** `/api/seat/room/{roomId}`: Get seats for a specific room.
+- **DELETE** `/api/seat/{id}`: Delete a seat.
 
+  
+### For user role
+- **GET** `/api/showtime/by-date`: Get showtimes for a specific date.
+- **GET** `/api/reserve/user`: Get a list of upcoming reservations for the logged-in user.
+- **POST** `/api/reserve/user`: Create a reserve for the logged-in user.
+- **PUT** `/api/reserve/cancel/{reserveId}`: Cancel a reservation (User).
+- **GET** `/api/seat/showtime/{showtimeId}`: Get available seats for a specific showtime
+
+  
 ### Authentication
 - **POST** `/api/auth/signup`: User registration.
 - **POST** `/api/auth/signin`: User login.
